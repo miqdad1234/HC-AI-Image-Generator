@@ -1,0 +1,166 @@
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css')}}"
+    />
+  </head>
+
+  <body>
+    <div class="container-fluid h-100">
+      <div class="row justify-content-center h-100">
+        <div class="col-md-8 col-xl-6 chat">
+          <div class="card">
+            <div class="card-header msg_head">
+              <div class="d-flex bd-highlight">
+                <div class="img_cont">
+                  <img
+                    src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png"
+                    class="rounded-circle user_img"
+                  />
+                  <span class="online_icon"></span>
+                </div>
+                <div class="user_info">
+                  <span>Genai - AI Img generator</span>
+                  <p>Go to .ipynb file in repo after downloading the prerequests in the readme to generate your own img!</p>
+                </div>
+              </div>
+            </div>
+            <img class="image" src="">
+            <div id="messageFormeight" class="card-body msg_card_body"></div>
+            <div class="card-footer">
+              <form id="messageArea" class="input-group">
+                
+                <div class="input-group-append">
+                  
+                  
+                    <i class="fas fa-location-arrow"></i>
+                  </button>
+                </div>
+                <div class="dropdown">
+                  <div class="select">
+                    <span class="selected">See some examples but go to -demo.ipynb- file in the sd1 folder in the repo if you want to generate your own photo.</span>
+                    <div class="caret"></div>
+                 
+                    <ul class="menu">
+                        <li class="active">See some examples but go to -demo.ipynb- file in the sd1 folder in the repo if you want to generate your own photo.</li>
+                        <li class='no-1'>A dog wearing a comfy hat, looking at the camera, highly detailed, 4k ...</li>
+                        <li class="no-2">A dog wearing glasses, highly detailed, 4k, cinematic, ultra-sharp.</li>
+                        <li class="no-3">A dog wering sunglasses and a hat, highly detailed, 4k, cinematic, ultra-sharp.</li>
+                        <li class="no-4">A horse wearing boots, highly detailed, 4k, cinematic, ultra-sharp.</li>
+                        <li class="no-5">A cat wearing sunglasses, highly detailed, 4k, cinematic, ultra-sharp.</li>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <script>
+        const dropdowns = document.querySelectorAll('.dropdown');
+        const no_1 = document.querySelector('.no-1')
+        const no_2 = document.querySelector('.no-2')
+        const no_3 = document.querySelector('.no-3')
+        const no_4 = document.querySelector('.no-4')
+        const no_5 = document.querySelector('.no-5')
+        const image = document.querySelector('.image');
+
+        dropdowns.forEach(dropdown => {
+            const select = dropdown.querySelector('.select');
+            const caret = dropdown.querySelector('.caret');        
+            const menu = dropdown.querySelector('.menu');
+            const options = dropdown.querySelectorAll('.menu li');
+            const selected = dropdown.querySelector('.selected');
+        // in order if we had multiple of it
+        // add a click event to select element
+            select.addEventListener('click', () => {
+            select.classList.toggle('select-clicked');
+            caret.classList.toggle('caret-rotate');
+            menu.classList.toggle('menu-open');
+            });
+            options.forEach(option => {
+            option.addEventListener('click', () => {
+                selected.innerHTML = option.innerHTML;
+                select.classList.remove('select-clicked');
+                caret.classList.remove('caret-rotate');
+                menu.classList.remove('menu-open');
+                if (selected == ".1") {
+                image.setAttribute('src', 'https://plus.unsplash.com/premium_photo-1670148434900-5f0af77ba500?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+                }
+                options.forEach(option => {                
+                option.classList.remove('active');
+                });
+                option.classList.add('active');
+                if (dropdown.querySelector('.active') == no_1) {
+                    image.setAttribute('src', "../images/output.png")
+                } else if (dropdown.querySelector('.active') == no_2) {
+                    image.setAttribute('src', "../images/output-1.png")
+                } else if (dropdown.querySelector('.active') == no_3) {
+                    image.setAttribute('src', "../images/output-2.png")
+                } else if (dropdown.querySelector('.active') == no_4) {
+                    image.setAttribute('src', "../images/output-3.png")
+                } else if (dropdown.querySelector('.active') == no_5) {
+                    image.setAttribute('src', "../images/output-4.png")
+                } else {
+                    image.setAttribute('src', "")
+                }
+                });
+            });
+        });
+    </script>
+    <script>
+      function scrollToBottom() {
+        var messageBody = document.getElementById("messageFormeight");
+        messageBody.scrollTop = messageBody.scrollHeight;
+      }
+
+      $(document).ready(function () {
+        $("#messageArea").on("submit", function (event) {
+          const date = new Date();
+          const hour = date.getHours();
+          const minute = date.getMinutes();
+          const str_time = hour + ":" + minute;
+          var rawText = $("#text").val();
+
+         
+          scrollToBottom();
+          
+          }).done(function (data) {
+            
+            scrollToBottom();
+            });
+            event.preventDefault();
+        });
+    
+    </script>
+  </body>
+</html>
