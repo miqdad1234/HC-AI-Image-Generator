@@ -1,7 +1,7 @@
 # pytorch-stable-diffusion
 PyTorch implementation of Stable Diffusion from scratch
 
-## How to use:
+## How to run your own generated photo because I didn't put it in the web app because of it was slow to run in the web:
 ### Download weights and tokenizer files:
 
 1. Download `vocab.json` and `merges.txt` from https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/tree/main/tokenizer and save them in the `data` folder
